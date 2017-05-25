@@ -15,7 +15,13 @@ router.get('/:searchTerm*?', (req, res) => {
       response
         .json()
         .then(data => {
-          res.json(data);
+          res.json({
+            count: data.count,
+            artObjects: data.artObjects.map(artObject => ({
+              title: artObject.title,
+              imageURL: artObject.headerImage ? artObject.headerImage.url : ''
+            })).sort((a, b) => { return a.title < b.title ? -1 : 1 })
+          });
         });
     });
 });
