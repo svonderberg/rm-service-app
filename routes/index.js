@@ -25,7 +25,8 @@ router.get('/:searchTerm*?', (req, res) => {
             count: data.count,
             artObjects: data.artObjects.map(artObject => ({
               title: artObject.title,
-              imageURL: artObject.headerImage ? artObject.headerImage.url : ''
+              imageURL: artObject.headerImage ? artObject.headerImage.url : '',
+              pageURL: artObject.links.web
             })).sort((a, b) => { return a.title < b.title ? -1 : 1 }) // sort titles alphabetically
           });
         });
