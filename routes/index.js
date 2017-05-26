@@ -13,7 +13,7 @@ router.get('/:searchTerm*?', (req, res) => {
   return fetch(API + (searchTerm ? ('&q=' + searchTerm) : ''))
     .then(response => {
       // domain lock to client app
-      res.set('Access-Control-Allow-Origin', 'https://svonderberg.github.io/');
+      res.set('Access-Control-Allow-Origin', 'https://svonderberg.github.io');
 
       response
         .json()
