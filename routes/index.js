@@ -12,8 +12,8 @@ router.get('/:searchTerm*?', (req, res) => {
 
   return fetch(API + (searchTerm ? ('&q=' + searchTerm) : ''))
     .then(response => {
-      // for local dev set cross origin to allow localhost
-      res.set('Access-Control-Allow-Origin', '*');
+      // domain lock to client app
+      res.set('Access-Control-Allow-Origin', 'https://svonderberg.github.io/');
 
       response
         .json()
