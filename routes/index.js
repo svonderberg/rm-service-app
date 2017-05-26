@@ -1,11 +1,10 @@
 import express from 'express';
 import fetch from 'node-fetch';
-import API_KEY from '../api-key'; // import api key as spearate module so it can be ignored by git
 
 const router = express.Router();
 
 // set default options JSON format and only results with images
-const API = `https://www.rijksmuseum.nl/api/en/collection?key=${API_KEY}&format=json&imgonly=True`;
+const API = `https://www.rijksmuseum.nl/api/en/collection?key=${process.env.APIKEY}&format=json&imgonly=True`;
 
 // capture optional search term in route
 router.get('/:searchTerm*?', (req, res) => {
@@ -14,7 +13,7 @@ router.get('/:searchTerm*?', (req, res) => {
   return fetch(API + (searchTerm ? ('&q=' + searchTerm) : ''))
     .then(response => {
       // for local dev set cross origin to allow localhost
-      res.set('Access-Control-Allow-Origin', 'http://localhost:3001');
+      res.set('Access-Control-Allow-Origin', '*');
 
       response
         .json()
